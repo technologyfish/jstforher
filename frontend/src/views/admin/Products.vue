@@ -222,7 +222,7 @@ const fetchList = async () => {
       params.is_active = filters.is_active
     }
     
-    const res = await request.get('/admin/products', { params })
+    const res = await request.get('/api/admin/products', { params })
     tableData.value = res.data.data
     pagination.total = res.data.total
   } catch (error) {
@@ -268,7 +268,7 @@ const handleDelete = async (row) => {
       type: 'warning'
     })
 
-    await request.delete(`/admin/products/${row.id}`)
+    await request.delete(`/api/admin/products/${row.id}`)
     ElMessage.success('删除成功')
     fetchList()
   } catch (error) {
@@ -287,10 +287,10 @@ const handleSubmit = async () => {
       submitLoading.value = true
       try {
         if (formData.id) {
-          await request.put(`/admin/products/${formData.id}`, formData)
+          await request.put(`/api/admin/products/${formData.id}`, formData)
           ElMessage.success('更新成功')
         } else {
-          await request.post('/admin/products', formData)
+          await request.post('/api/admin/products', formData)
           ElMessage.success('创建成功')
         }
         dialogVisible.value = false

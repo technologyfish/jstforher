@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NewsletterSubscription;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 
 class NewsletterSubscriptionController extends Controller
 {
@@ -14,7 +15,8 @@ class NewsletterSubscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $query = NewsletterSubscription::with('processedBy');
+        // 不使用关联查询，避免潜在的外键问题
+        $query = NewsletterSubscription::query();
 
         // 筛选状态
         if ($request->has('status') && $request->status !== '') {
@@ -47,7 +49,7 @@ class NewsletterSubscriptionController extends Controller
      */
     public function show($id)
     {
-        $subscription = NewsletterSubscription::with('processedBy')->find($id);
+        $subscription = NewsletterSubscription::find($id);
 
         if (!$subscription) {
             return response()->json([
@@ -93,19 +95,24 @@ class NewsletterSubscriptionController extends Controller
         }
 
         try {
-            $subscription->status = $request->status;
+            $subscription->status = (int)$request->status;
             
             if ($request->has('admin_note')) {
                 $subscription->admin_note = $request->admin_note;
             }
 
             // 如果标记为已处理，记录处理时间和处理人
-            if ($request->status == NewsletterSubscription::STATUS_PROCESSED) {
-                $subscription->processed_at = now();
+            if ((int)$request->status === NewsletterSubscription::STATUS_PROCESSED) {
+                $subscription->processed_at = Carbon::now();
                 // 从JWT token中获取管理员ID
-                $admin = auth('admin')->user();
-                if ($admin) {
-                    $subscription->processed_by = $admin->id;
+                try {
+                    $admin = auth()->user();
+                    if ($admin) {
+                        $subscription->processed_by = $admin->id;
+                    }
+                } catch (\Exception $authException) {
+                    // 如果获取用户失败，记录日志但不影响主流程
+                    \Log::warning('Failed to get auth user: ' . $authException->getMessage());
                 }
             }
 
@@ -117,10 +124,20 @@ class NewsletterSubscriptionController extends Controller
                 'data' => $subscription
             ]);
         } catch (\Exception $e) {
+            // 记录详细错误日志
+            \Log::error('Newsletter subscription update failed', [
+                'id' => $id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
             return response()->json([
                 'code' => 500,
-                'message' => '更新失败',
-                'data' => null
+                'message' => '更新失败: ' . $e->getMessage(),
+                'data' => [
+                    'error_line' => $e->getLine(),
+                    'error_file' => basename($e->getFile())
+                ]
             ], 500);
         }
     }
@@ -154,7 +171,7 @@ class NewsletterSubscriptionController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'code' => 500,
-                'message' => '删除失败',
+                'message' => '批量删除失败: ' . $e->getMessage(),
                 'data' => null
             ], 500);
         }
@@ -186,7 +203,7 @@ class NewsletterSubscriptionController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'code' => 500,
-                'message' => '删除失败',
+                'message' => '删除失败: ' . $e->getMessage(),
                 'data' => null
             ], 500);
         }

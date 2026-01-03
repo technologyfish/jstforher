@@ -6,7 +6,7 @@ export function uploadImage(file) {
   formData.append('file', file)
   
   return request({
-    url: '/admin/upload/image',
+    url: '/api/admin/upload/image',
     method: 'post',
     data: formData,
     headers: {
@@ -23,7 +23,7 @@ export function uploadImages(files) {
   })
   
   return request({
-    url: '/admin/upload/images',
+    url: '/api/admin/upload/images',
     method: 'post',
     data: formData,
     headers: {

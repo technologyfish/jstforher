@@ -3,7 +3,7 @@
     <div class="about-container">
       <section class="designer-section">
         <div class="designer-image">
-          <img src="/src/assets/images/img-7.png" alt="About the Designer" />
+          <img :src="designerImage" alt="About the Designer" />
         </div>
         <div class="designer-content">
           <h2>About the Designer</h2>
@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+import designerImage from '@/assets/images/img-7.png'
 </script>
 
 <style lang="scss" scoped>

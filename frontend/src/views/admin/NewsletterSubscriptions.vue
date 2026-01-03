@@ -156,7 +156,7 @@ const fetchList = async () => {
       email: filters.email,
       status: filters.status
     }
-    const res = await request.get('/admin/newsletter-subscriptions', { params })
+    const res = await request.get('/api/admin/newsletter-subscriptions', { params })
     tableData.value = res.data.data
     pagination.total = res.data.total
   } catch (error) {
@@ -192,7 +192,7 @@ const handleEdit = (row) => {
 const handleSave = async () => {
   saveLoading.value = true
   try {
-    await request.put(`/admin/newsletter-subscriptions/${editForm.id}/status`, {
+    await request.put(`/api/admin/newsletter-subscriptions/${editForm.id}/status`, {
       status: editForm.status,
       admin_note: editForm.admin_note
     })
@@ -215,7 +215,7 @@ const handleDelete = async (row) => {
       type: 'warning'
     })
     
-    await request.delete(`/admin/newsletter-subscriptions/${row.id}`)
+    await request.delete(`/api/admin/newsletter-subscriptions/${row.id}`)
     ElMessage.success('删除成功')
     fetchList()
   } catch (error) {

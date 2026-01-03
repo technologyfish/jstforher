@@ -19,7 +19,7 @@
           </p>
         </div>
         <div class="hero-image">
-          <img src="/src/assets/images/img-1.jpg" alt="Bridal Veil" />
+          <img :src="heroImage" alt="Bridal Veil" />
         </div>
       </div>
     </section>
@@ -79,7 +79,7 @@
     <!-- Fashion Section - Left Image Right Text -->
     <section class="fashion-section">
       <div class="fashion-image">
-        <img src="/src/assets/images/img-2.png" alt="Responsible Fashion" />
+        <img :src="fashionImage" alt="Responsible Fashion" />
       </div>
       <div class="fashion-content">
         <h3>A Brand Built for Boutiques</h3>
@@ -129,7 +129,7 @@
         </div>
       </div>
       <div class="working-image">
-        <img src="/src/assets/images/img-2.png" alt="How to Work With Us" />
+        <img :src="workingImage" alt="How to Work With Us" />
       </div>
     </section>
     </div>
@@ -146,6 +146,13 @@ import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { getProductList } from '@/api/product'
+
+// Import images
+import heroImage from '@/assets/images/img-1.jpg'
+import fashionImage from '@/assets/images/img-2.png'
+import workingImage from '@/assets/images/img-2.png'
+import defaultCollectionImage from '@/assets/images/img-3.jpg'
+import featureImage from '@/assets/images/img-5.jpg'
 
 const router = useRouter()
 const modules = [Navigation]
@@ -165,7 +172,7 @@ const loadProducts = async () => {
     collections.value = res.data.map(product => ({
       id: product.id,
       name: product.name,
-      image: product.cover_image || '/src/assets/images/img-3.jpg'
+      image: product.cover_image || defaultCollectionImage
     }))
   } catch (error) {
     console.error('Failed to load products:', error)
@@ -184,25 +191,25 @@ const features = ref([
     id: 1,
     title: 'Boutique Focused',
     description: 'Designed exclusively for independent bridal boutiques and specialty retailers.',
-    image: '/src/assets/images/img-5.jpg'
+    image: featureImage
   },
   {
     id: 2,
     title: 'Timeless Aesthetic',
     description: 'Refined designs created to remain relevant beyond seasonal trends.',
-    image: '/src/assets/images/img-5.jpg'
+    image: featureImage
   },
   {
     id: 3,
     title: 'Reliable Production',
     description: 'Consistent quality control and dependable lead times you can plan around.',
-    image: '/src/assets/images/img-5.jpg'
+    image: featureImage
   },
   {
     id: 4,
     title: 'Flexible MOQ',
     description: 'Wholesale terms that support growing and established boutiques alike.',
-    image: '/src/assets/images/img-5.jpg'
+    image: featureImage
   }
 ])
 

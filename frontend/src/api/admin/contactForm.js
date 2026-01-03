@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 获取表单留资列表
 export function getContactFormList(params) {
   return request({
-    url: '/admin/contact-forms',
+    url: '/api/admin/contact-forms',
     method: 'get',
     params
   })
@@ -12,7 +12,7 @@ export function getContactFormList(params) {
 // 获取表单留资详情
 export function getContactFormDetail(id) {
   return request({
-    url: `/admin/contact-forms/${id}`,
+    url: `/api/admin/contact-forms/${id}`,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getContactFormDetail(id) {
 // 标记为已读
 export function markAsRead(id) {
   return request({
-    url: `/admin/contact-forms/${id}/mark-read`,
+    url: `/api/admin/contact-forms/${id}/mark-read`,
     method: 'post'
   })
 }
@@ -28,7 +28,7 @@ export function markAsRead(id) {
 // 批量标记为已读
 export function batchMarkAsRead(ids) {
   return request({
-    url: '/admin/contact-forms/batch-mark-read',
+    url: '/api/admin/contact-forms/batch-mark-read',
     method: 'post',
     data: { ids }
   })
@@ -37,7 +37,7 @@ export function batchMarkAsRead(ids) {
 // 删除表单留资
 export function deleteContactForm(id) {
   return request({
-    url: `/admin/contact-forms/${id}`,
+    url: `/api/admin/contact-forms/${id}`,
     method: 'delete'
   })
 }

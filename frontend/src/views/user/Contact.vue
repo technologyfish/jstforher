@@ -56,7 +56,7 @@
 
       <!-- Right Section - Image -->
       <div class="contact-image-section">
-        <img src="/src/assets/images/img-8.png" alt="Contact" />
+        <img :src="contactImage" alt="Contact" />
       </div>
     </div>
   </div>
@@ -66,6 +66,7 @@
 import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import { submitContactForm } from '@/api/contact'
+import contactImage from '@/assets/images/img-8.png'
 
 const loading = ref(false)
 

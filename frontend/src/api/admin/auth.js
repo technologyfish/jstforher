@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 管理员登录
 export function login(data) {
   return request({
-    url: '/admin/login',
+    url: '/api/admin/login',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function login(data) {
 // 获取当前管理员信息
 export function getAdminInfo() {
   return request({
-    url: '/admin/me',
+    url: '/api/admin/me',
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getAdminInfo() {
 // 登出
 export function logout() {
   return request({
-    url: '/admin/logout',
+    url: '/api/admin/logout',
     method: 'post'
   })
 }
