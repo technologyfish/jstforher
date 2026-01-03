@@ -1,0 +1,57 @@
+// px to vw 转换函数 (移动端使用)
+@function pxtovw($px, $design-width: 750) {
+  @return ($px / $design-width) * 100vw;
+}
+
+// px to rem 转换函数
+@function pxtorem($px, $base: 16) {
+  @return ($px / $base) * 1rem;
+}
+
+// 响应式尺寸 Mixin
+// PC端使用px，移动端使用pxtovw
+@mixin responsive-size($property, $pc-value, $mobile-value: null) {
+  // 如果没有传入移动端值，则使用PC端值
+  $mobile: if($mobile-value, $mobile-value, $pc-value);
+  
+  // PC端 - 使用px
+  #{$property}: #{$pc-value}px;
+  
+  // 移动端 - 使用vw
+  @media (max-width: $breakpoint-mobile) {
+    #{$property}: pxtovw($mobile);
+  }
+}
+
+// 多属性响应式尺寸 Mixin
+@mixin responsive-spacing($top: null, $right: null, $bottom: null, $left: null, $mobile-ratio: 1) {
+  @if $top and $right and $bottom and $left {
+    padding: #{$top}px #{$right}px #{$bottom}px #{$left}px;
+    @media (max-width: $breakpoint-mobile) {
+      padding: pxtovw($top * $mobile-ratio) pxtovw($right * $mobile-ratio) pxtovw($bottom * $mobile-ratio) pxtovw($left * $mobile-ratio);
+    }
+  } @else if $top and $right {
+    padding: #{$top}px #{$right}px;
+    @media (max-width: $breakpoint-mobile) {
+      padding: pxtovw($top * $mobile-ratio) pxtovw($right * $mobile-ratio);
+    }
+  } @else if $top {
+    padding: #{$top}px;
+    @media (max-width: $breakpoint-mobile) {
+      padding: pxtovw($top * $mobile-ratio);
+    }
+  }
+}
+
+// 字体响应式 Mixin
+@mixin responsive-font($pc-size, $mobile-size: null) {
+  $mobile: if($mobile-size, $mobile-size, $pc-size);
+  
+  font-size: #{$pc-size}px;
+  
+  @media (max-width: $breakpoint-mobile) {
+    font-size: pxtovw($mobile);
+  }
+}
+
+
