@@ -25,6 +25,27 @@ class SubCategoryController extends Controller
         $query->orderBy('sort_order', 'asc')
               ->orderBy('created_at', 'desc');
 
+        // 分页处理
+        if ($request->has('page') && $request->input('page')) {
+            $perPage = $request->input('per_page', 9); // 默认每页9条
+            $subCategories = $query->paginate($perPage);
+            
+            return response()->json([
+                'success' => true,
+                'data' => $subCategories->items(),
+                'pagination' => [
+                    'total' => $subCategories->total(),
+                    'per_page' => $subCategories->perPage(),
+                    'current_page' => $subCategories->currentPage(),
+                    'last_page' => $subCategories->lastPage(),
+                    'from' => $subCategories->firstItem(),
+                    'to' => $subCategories->lastItem(),
+                    'has_more' => $subCategories->hasMorePages()
+                ]
+            ]);
+        }
+
+        // 不分页，返回所有数据
         $subCategories = $query->get();
 
         return response()->json([
