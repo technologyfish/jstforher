@@ -1,7 +1,14 @@
 <template>
   <div class="lookbook-page">
     <div class="page-header">
-      <h1>Explore our products</h1>
+      <h1>A Curated Lookbook Preview</h1>
+      <p class="header-description">
+        A selected preview of our collection.
+        More styles available upon inquiry.
+      </p>
+      <p class="header-contact">
+        <router-link to="/contact">Contact us to view the full collection</router-link>
+      </p>
     </div>
 
     <div class="lookbook-container">
@@ -58,9 +65,10 @@
               <div class="sub-category-image">
                 <img :src="subCategory.cover_image || 'https://via.placeholder.com/400x500'" :alt="subCategory.name" />
               </div>
-              <h4 class="sub-category-name">{{ subCategory.name }}</h4>
-            </div>
+            <h4 class="sub-category-name">{{ subCategory.name }}</h4>
+            <p class="sub-category-description" v-if="subCategory.description">{{ subCategory.description }}</p>
           </div>
+        </div>
 
           <!-- 分页器 -->
           <div class="pagination" v-if="pagination.last_page > 1">
@@ -95,65 +103,20 @@
       </main>
     </div>
 
-    <!-- Image Gallery Modal -->
-    <teleport to="body">
-      <div v-if="showGallery" class="gallery-modal" @click="closeGallery">
-        <div class="gallery-content" @click.stop>
-          <!-- Close Button -->
-          <button class="close-btn" @click="closeGallery">
-            <img src="@/assets/images/icon-close.png" alt="Close" />
-          </button>
-
-          <!-- Main Image -->
-          <div class="main-image">
-            <!-- Navigation Arrows -->
-            <button class="nav-btn prev" @click="prevImage" v-if="currentImages.length > 1">
-              <img src="@/assets/images/icon-prev.png" alt="Previous" />
-            </button>
-            <button class="nav-btn next" @click="nextImage" v-if="currentImages.length > 1">
-              <img src="@/assets/images/icon-next.png" alt="Next" />
-            </button>
-            
-            <img 
-              :src="currentImages[currentImageIndex]" 
-              alt="Gallery Image"
-              :style="{ transform: `scale(${zoomLevel})` }"
-            />
-          </div>
-
-          <!-- Thumbnails -->
-          <div class="thumbnails" v-if="currentImages.length > 1">
-            <div 
-              v-for="(image, index) in currentImages" 
-              :key="index"
-              class="thumbnail"
-              :class="{ active: index === currentImageIndex }"
-              @click="currentImageIndex = index"
-            >
-              <img :src="image" alt="" />
-            </div>
-          </div>
-
-          <!-- Zoom Controls -->
-          <div class="zoom-controls">
-            <button @click="zoomOut">
-              <img src="@/assets/images/icon-jian.png" alt="Zoom Out" />
-            </button>
-            <span>{{ Math.round(zoomLevel * 100) }}%</span>
-            <button @click="zoomIn">
-              <img src="@/assets/images/icon-add.png" alt="Zoom In" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </teleport>
+    <!-- vue-easy-lightbox -->
+    <vue-easy-lightbox
+      :visible="showGallery"
+      :imgs="currentImages"
+      :index="currentImageIndex"
+      @hide="closeGallery"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { getCategories, getSubCategories } from '@/api/category'
-import { getArticles } from '@/api/article'
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 const loading = ref(false)
 const loadingMore = ref(false)
@@ -165,7 +128,6 @@ const categoryExpanded = ref(true)
 const showGallery = ref(false)
 const currentSubCategory = ref(null)
 const currentImageIndex = ref(0)
-const zoomLevel = ref(1)
 const hasMore = ref(false)
 
 // 分页相关
@@ -327,42 +289,11 @@ const openGallery = async (subCategory) => {
   
   currentSubCategory.value = subCategory
   currentImageIndex.value = 0
-  zoomLevel.value = 1
   showGallery.value = true
-  document.body.style.overflow = 'hidden'
 }
 
 const closeGallery = () => {
   showGallery.value = false
-  document.body.style.overflow = ''
-}
-
-const prevImage = () => {
-  if (currentImageIndex.value > 0) {
-    currentImageIndex.value--
-  } else {
-    currentImageIndex.value = currentImages.value.length - 1
-  }
-}
-
-const nextImage = () => {
-  if (currentImageIndex.value < currentImages.value.length - 1) {
-    currentImageIndex.value++
-  } else {
-    currentImageIndex.value = 0
-  }
-}
-
-const zoomIn = () => {
-  if (zoomLevel.value < 2) {
-    zoomLevel.value += 0.25
-  }
-}
-
-const zoomOut = () => {
-  if (zoomLevel.value > 0.75) {
-    zoomLevel.value -= 0.25
-  }
 }
 
 const goToPage = async (page) => {
@@ -412,6 +343,31 @@ onMounted(() => {
   h1 {
     font-size: 28px;
     font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .header-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-weight: 300;
+  }
+
+  .header-contact {
+    font-size: 14px;
+    margin-top: 15px;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+        text-decoration: underline;
+      }
+    }
   }
 }
 
@@ -588,6 +544,15 @@ onMounted(() => {
       text-align: center;
       font-size: 16px;
       font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .sub-category-description {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      padding: 0 10px;
     }
 
     // 没有图片集的产品册样式
@@ -667,203 +632,6 @@ onMounted(() => {
   }
 }
 
-// Gallery Modal
-.gallery-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-}
-
-.gallery-content {
-  position: relative;
-  width: 90vw;
-  max-width: 1200px;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .close-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-    z-index: 100;
-    padding: 0;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.7);
-    }
-
-    img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-    }
-  }
-
-  .main-image {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    height: calc(90vh - 180px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      background: rgba(0, 0, 0, 0.5);
-      border: none;
-      cursor: pointer;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-      z-index: 10;
-      padding: 0;
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.7);
-      }
-
-      &.prev {
-        left: 10px;
-      }
-
-      &.next {
-        right: 10px;
-      }
-
-      img {
-        width: 24px;
-        height: 24px;
-        object-fit: contain;
-        cursor: pointer;
-      }
-    }
-
-    > img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      transition: transform 0.3s ease;
-      cursor: zoom-in;
-    }
-  }
-
-  .thumbnails {
-    display: flex;
-    gap: 8px;
-    max-width: 800px;
-    padding: 10px 0;
-    overflow-x: auto;
-    
-    // 隐藏滚动条但保持可滚动
-    scrollbar-width: none; // Firefox
-    -ms-overflow-style: none; // IE and Edge
-    
-    &::-webkit-scrollbar {
-      display: none; // Chrome, Safari, Opera
-    }
-
-    .thumbnail {
-      width: 60px;
-      height: 60px;
-      flex-shrink: 0;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-      border: 2px solid transparent;
-      border-radius: 4px;
-
-      &:hover,
-      &.active {
-        opacity: 1;
-        border-color: $white;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 4px;
-      }
-    }
-  }
-
-  .zoom-controls {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
-    border-radius: 25px;
-    z-index: 10;
-
-    button {
-      width: 30px;
-      height: 30px;
-      background: transparent;
-      border: 1px solid $white;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-      padding: 0;
-
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      img {
-        width: 16px;
-        height: 16px;
-        object-fit: contain;
-      }
-    }
-
-    span {
-      color: $white;
-      font-size: 14px;
-      min-width: 50px;
-      text-align: center;
-    }
-  }
-}
-
 @media (max-width: $breakpoint-mobile) {
   .lookbook-page {
     padding-top: pxtovw(80);
@@ -874,6 +642,23 @@ onMounted(() => {
 
     h1 {
       font-size: pxtovw(48);
+      margin-bottom: pxtovw(30);
+    }
+
+    .header-description {
+      font-size: pxtovw(28);
+      line-height: 1.8;
+      margin-bottom: pxtovw(20);
+      padding: 0 pxtovw(30);
+    }
+
+    .header-contact {
+      font-size: pxtovw(24);
+      margin-top: pxtovw(20);
+
+      a {
+        color: $primary-color;
+      }
     }
   }
 
@@ -942,72 +727,13 @@ onMounted(() => {
       .sub-category-name {
         font-size: pxtovw(26);
         margin-top: pxtovw(15);
-      }
-    }
-  }
-
-  .gallery-modal {
-    padding: pxtovw(30);
-  }
-
-  .gallery-content {
-    width: 95vw;
-    height: 80vh;
-
-    .close-btn {
-      top: pxtovw(20);
-      right: pxtovw(20);
-      width: pxtovw(60);
-      height: pxtovw(60);
-      font-size: pxtovw(40);
-    }
-
-    .main-image {
-      width: 90vw;
-      height: 70vh;
-      margin-bottom: pxtovw(30);
-
-      .nav-btn {
-        width: pxtovw(60);
-        height: pxtovw(60);
-        font-size: pxtovw(36);
-
-        &.prev {
-          left: pxtovw(30);
-        }
-
-        &.next {
-          right: pxtovw(30);
-        }
-      }
-    }
-
-    .thumbnails {
-      max-width: 90vw;
-      gap: pxtovw(12);
-      padding: pxtovw(10) 0;
-      
-      .thumbnail {
-        width: pxtovw(80);
-        height: pxtovw(80);
-        border-width: pxtovw(3);
-      }
-    }
-
-    .zoom-controls {
-      bottom: pxtovw(-80);
-      padding: pxtovw(15) pxtovw(30);
-      gap: pxtovw(20);
-
-      button {
-        width: pxtovw(40);
-        height: pxtovw(40);
-        font-size: pxtovw(24);
+        margin-bottom: pxtovw(12);
       }
 
-      span {
-        font-size: pxtovw(20);
-        min-width: pxtovw(80);
+      .sub-category-description {
+        font-size: pxtovw(22);
+        padding: 0 pxtovw(15);
+        line-height: 1.5;
       }
     }
   }

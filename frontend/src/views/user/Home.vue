@@ -34,7 +34,8 @@
 
     <!-- Collections Section with Swiper -->
     <section class="collections-section">
-      <h3 class="collections-title">Shop by collections</h3>
+      <h3 class="collections-title">A Curated Selection</h3>
+      <p class="collections-subtitle">Discover more styles in our Lookbook.</p>
       <div class="swiper-container">
         <swiper
           :modules="modules"
@@ -150,10 +151,12 @@ import { getProductList } from '@/api/product'
 // Import images
 import heroImage from '@/assets/images/img-1.jpg'
 import fashionImage from '@/assets/images/img-2.png'
-import workingImage from '@/assets/images/img-2.png'
+import workingImage from '@/assets/images/img-2-2.png'
 import defaultCollectionImage from '@/assets/images/img-3.jpg'
-import featureImage from '@/assets/images/img-5.jpg'
-
+import featureImage1 from '@/assets/images/1.png'
+import featureImage2 from '@/assets/images/2.png'
+import featureImage3 from '@/assets/images/3.png'
+import featureImage4 from '@/assets/images/4.png'
 const router = useRouter()
 const modules = [Navigation]
 
@@ -191,25 +194,25 @@ const features = ref([
     id: 1,
     title: 'Boutique Focused',
     description: 'Designed exclusively for independent bridal boutiques and specialty retailers.',
-    image: featureImage
+    image: featureImage1
   },
   {
     id: 2,
     title: 'Timeless Aesthetic',
     description: 'Refined designs created to remain relevant beyond seasonal trends.',
-    image: featureImage
+    image: featureImage2
   },
   {
     id: 3,
     title: 'Reliable Production',
     description: 'Consistent quality control and dependable lead times you can plan around.',
-    image: featureImage
+    image: featureImage3
   },
   {
     id: 4,
     title: 'Flexible MOQ',
     description: 'Wholesale terms that support growing and established boutiques alike.',
-    image: featureImage
+    image: featureImage4
   }
 ])
 
@@ -341,9 +344,17 @@ onMounted(() => {
   .collections-title {
     text-align: center;
     font-size: 32px;
-    margin-bottom: 60px;
+    margin-bottom: 15px;
     font-weight: 400;
     color: #333;
+  }
+
+  .collections-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 45px;
+    font-weight: 300;
   }
 
   .swiper-container {
@@ -507,8 +518,8 @@ onMounted(() => {
   .features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    max-width: 1440px;
+    gap: 50px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
@@ -519,11 +530,17 @@ onMounted(() => {
       margin-bottom: 20px;
       overflow: hidden;
       border-radius: 4px;
-
+      padding: 20px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
       img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
+        width: auto;
+        height: 160px;
+        max-width: 100%;
+        object-fit: contain;
         transition: transform 0.3s;
       }
     }
@@ -727,8 +744,18 @@ onMounted(() => {
     }
 
     .feature-item {
-      .feature-image img {
-        height: pxtovw(400);
+      .feature-image {
+        height: pxtovw(280);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: pxtovw(30);
+        
+        img {
+          height: pxtovw(220);
+          width: auto;
+          max-width: 100%;
+        }
       }
 
       .feature-title {
@@ -796,6 +823,11 @@ onMounted(() => {
     .collections-title,
     .section-title {
       font-size: pxtovw(48);
+      margin-bottom: pxtovw(20);
+    }
+
+    .collections-subtitle {
+      font-size: pxtovw(26);
       margin-bottom: pxtovw(60);
     }
 
