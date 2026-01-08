@@ -4,13 +4,14 @@
       <div class="footer-content">
         <!-- Left Section -->
         <div class="footer-left">
-          <h3 class="brand-name">NEA • MILANO</h3>
+          <h3 class="brand-name">
+            JST FOR HER
+          </h3>
           <p class="brand-description">
-            Italy-based woman owned brand of accessories<br />
-            and hair jewelry for brides and beyond.<br />
-            We value quality, craftsmanship and<br />
-            uniqueness. Our accessories are ethically made<br />
-            and totally fab.
+            A bridal veil brand offering curated designs<br />
+            for modern bridal boutiques.<br />
+            We value quality, consistency, and craftsmanship,<br />
+            creating veils designed to elevate every bridal look.
           </p>
           
           <!-- Links under brand info -->
@@ -124,6 +125,9 @@ const handleSubscribe = async () => {
     letter-spacing: 2px;
     margin-bottom: 25px;
     color: #333;
+    .logo-image{
+      width: 75px;
+    }
   }
 
   .brand-description {
@@ -274,6 +278,10 @@ const handleSubscribe = async () => {
   .footer-left .brand-name {
     font-size: pxtovw(28);
     margin-bottom: pxtovw(30);
+  }
+
+  .footer-left .brand-name .logo-image {
+    width: pxtorem(75);
   }
 
   .footer-left .brand-description {

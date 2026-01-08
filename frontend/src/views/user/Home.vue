@@ -538,7 +538,7 @@ onMounted(() => {
       
       img {
         width: auto;
-        height: 160px;
+        height: 70px;
         max-width: 100%;
         object-fit: contain;
         transition: transform 0.3s;
@@ -752,7 +752,7 @@ onMounted(() => {
         padding: pxtovw(30);
         
         img {
-          height: pxtovw(220);
+          height: pxtovw(100);
           width: auto;
           max-width: 100%;
         }

@@ -191,14 +191,14 @@ watch(currentRoute, () => {
   text-decoration: none;
 
   .logo-image {
-    height: 75px;
+    height: 64px;
     width: auto;
     object-fit: contain;
   }
   
   @media (max-width: $breakpoint-mobile) {
     .logo-image {
-      height: pxtovw(75);
+      height: pxtovw(64);
     }
   }
 }
