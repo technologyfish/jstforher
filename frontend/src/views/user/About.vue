@@ -6,15 +6,19 @@
           <img :src="designerImage" alt="About the Designer" />
         </div>
         <div class="designer-content">
-          <h2>About the Designer</h2>
+          <h2>Expert Craftsmanship, Small Studio Heart</h2>
           <p>
-            Anastasia Emelina is a heart and soul behind NEA • MILANO. She is a Russian-born, Italian-based stylist and jewelry designer. After having graduated with a degree in design and art history in St. Petersburg, she moved to Milan.
-          </p>
+
+            <span style="font-weight: bold;color: #333">The Story</span> <br/>At Jstforher, we don’t just manufacture veils; we craft them.Our founder is a master artisan with over 10 years of experience in the delicate art of bridal millinery. What started as a passion for fine lace and ethereal tulle has grown into a specialized studio dedicated to the highest standards of quality.           </p>
           <p>
-            In 2018, she completed her studies with a course in brand design and advertising. Following her dream to make her living as an artisan, she went on to create her own bridal accessory brand with the goal of introducing it to brides, a modern yet romantic interpretation of accessories. She works out of her personalised home studio in Milan. She is most known for her metal adornments, but she is able to keep her creativity flowing by always introducing new materials and techniques. She loves photography and enjoys creating and styling fine art sets for wedding editorials and brands.
+            <span style="font-weight: bold;color: #333">The Team & Artistry</span> <br/>We are not a mass-production factory.Our studio is a close-knit team of three: our founder and two highly skilled senior tailors. Every stitch, every bead, and every lace appliqué is handled by experts who understand the soul of a garment. Unlike assembly-line products, each Jstforher veil is treated as a piece of art. Because we are small, we are meticulous. Because we are experts, we are efficient. This allows us to offer couture-level quality at a price that makes sense for independent boutiques.
           </p>
+         <p>
+           <span style="font-weight: bold;color: #333">Our Commitment</span> <br/> Personal Responsibility, Professional Results.When you partner with us, you are speaking directly to the makers. Our founder personally oversees the quality control of every single order, ensuring that what reaches your boutique is nothing short of perfection. We take pride in our reliability, our transparent communication, and our unwavering commitment to your success.
+         </p>
+
           <p class="see-more">
-            See more of her work <a href="#" class="link">here</a>.
+            "Every veil tells a story. After a decade of working with delicate tulle and lace, I still personally oversee every piece that leaves our studio. To me, it’s not just a business—it’s a commitment to your boutique and your brides." — Janet, Founder of Jstforher
           </p>
         </div>
       </section>

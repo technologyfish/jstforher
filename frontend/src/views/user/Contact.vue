@@ -5,7 +5,7 @@
       <div class="contact-form-section">
         <h2 class="contact-title">Get in touch</h2>
 
-        <p class="form-intro">For custom orders or styling services submit our form below</p>
+        <p class="form-intro">Looking to carry JSTforher in your boutique? We love partnering with bridal shops and independent designers worldwide. Drop us a message for our latest Wholesale Catalog.</p>
 
         <form class="contact-form" @submit.prevent="handleSubmit">
           <div class="form-row">
@@ -40,6 +40,16 @@
           </div>
 
           <div class="form-group">
+            <label for="businessInfo">Business Name / Website</label>
+            <input 
+              type="text" 
+              id="businessInfo" 
+              v-model="formData.businessInfo" 
+              placeholder=""
+            />
+          </div>
+
+          <div class="form-group">
             <label for="message">Write a message</label>
             <textarea 
               id="message" 
@@ -59,6 +69,19 @@
         <img :src="contactImage" alt="Contact" />
       </div>
     </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <h2 class="info-title">Refined Bridal Veils & Accessories</h2>
+      <p class="info-description">
+        JST FOR HER designs bridal veils with a focus on timeless elegance and modern simplicity. Each style is carefully considered to enhance the bride's overall look, offering balance, grace, and graceful movement. Our aesthetic values restraint, comfort, and versatility, allowing boutiques to present veils that feel elevated, confident, and beautifully understated for the wedding day and beyond.
+      </p>
+      <div class="moq-info">
+        <h3 class="moq-title">Low MOQ & Lead Time</h3>
+        <p class="moq-detail"><strong>Min Order:</strong> Starts from 2 pieces (mixed style).</p>
+        <p class="moq-detail"><strong>Production:</strong> 7-15 days.</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -74,6 +97,7 @@ const formData = reactive({
   firstName: '',
   lastName: '',
   email: '',
+  businessInfo: '',
   message: ''
 })
 
@@ -84,6 +108,7 @@ const handleSubmit = async () => {
     const submitData = {
       name: `${formData.firstName} ${formData.lastName}`.trim(),
       email: formData.email,
+      business_info: formData.businessInfo,
       message: formData.message || ''
     }
     
@@ -94,6 +119,7 @@ const handleSubmit = async () => {
     formData.firstName = ''
     formData.lastName = ''
     formData.email = ''
+    formData.businessInfo = ''
     formData.message = ''
   } catch (error) {
     const message = error.response?.data?.message || 'Failed to send message. Please try again.'
@@ -272,6 +298,58 @@ const handleSubmit = async () => {
   }
 }
 
+// Info Section
+.info-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  text-align: center;
+
+  .info-title {
+    font-size: 28px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.4;
+  }
+
+  .info-description {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 50px;
+    text-align: justify;
+    text-align-last: center;
+  }
+
+  .moq-info {
+    padding: 10px 50px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+
+    .moq-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .moq-detail {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #666;
+      margin: 10px 0;
+      text-align: center;
+
+      strong {
+        color: #333;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
 @media (max-width: $breakpoint-mobile) {
   .contact-page {
     padding-top: pxtovw(80);
@@ -344,6 +422,38 @@ const handleSubmit = async () => {
 
     img {
       min-height: pxtovw(600);
+    }
+  }
+
+  .info-section {
+    padding: pxtovw(100) pxtovw(40);
+
+    .info-title {
+      font-size: pxtovw(42);
+      margin-bottom: pxtovw(40);
+      line-height: 1.4;
+    }
+
+    .info-description {
+      font-size: pxtovw(26);
+      line-height: 1.8;
+      margin-bottom: pxtovw(60);
+    }
+
+    .moq-info {
+      padding: pxtovw(10) pxtovw(40);
+      border-radius: pxtovw(12);
+
+      .moq-title {
+        font-size: pxtovw(32);
+        margin-bottom: pxtovw(30);
+      }
+
+      .moq-detail {
+        font-size: pxtovw(26);
+        line-height: 1.8;
+        margin: pxtovw(15) 0;
+      }
     }
   }
 }

@@ -16,12 +16,13 @@ class ContactController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:100',
             'email' => 'required|email|max:100',
+            'business_info' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:50',
             'subject' => 'nullable|string|max:200',
             'message' => 'nullable|string'
         ]);
 
-        $data = $request->only(['name', 'email', 'phone', 'subject', 'message']);
+        $data = $request->only(['name', 'email', 'business_info', 'phone', 'subject', 'message']);
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->header('User-Agent');
         $data['message'] = $data['message'] ?? ''; // 如果message为空，设置为空字符串

@@ -15,7 +15,7 @@
         <li><router-link to="/" :class="{ active: currentRoute === '/' }">Home</router-link></li>
         <li><router-link to="/lookbook" :class="{ active: currentRoute === '/lookbook' }">Lookbook</router-link></li>
         <li><router-link to="/about" :class="{ active: currentRoute === '/about' }">About</router-link></li>
-        <li><router-link to="/contact" :class="{ active: currentRoute === '/contact' }">Contact</router-link></li>
+        <li><router-link to="/contact" :class="{ active: currentRoute === '/contact' }">Wholesale&Contact</router-link></li>
       </ul>
 
       <!-- Center Logo -->

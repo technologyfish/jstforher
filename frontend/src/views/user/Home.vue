@@ -83,12 +83,12 @@
         <img :src="fashionImage" alt="Responsible Fashion" />
       </div>
       <div class="fashion-content">
-        <h3>A Brand Built for Boutiques</h3>
+        <h3>Quality Bridal Veils, Crafted for Boutiques</h3>
         <p>
-          Jstfoher is built around long-term wholesale partnerships. We focus on creating bridal veil collections that are refined, dependable, and commercially considered. By offering curated selections, flexible MOQ, and clear communication, we support boutiques in presenting veils that align with their aesthetic and their clients’ expectations.
+          Jstforher is built around long-term wholesale partnerships. We focus on creating bridal veil collections that are refined, dependable, and designed for the modern bride. By offering low MOQs, reliable lead times, and clear communication, we empower boutiques to offer exquisite veils that align perfectly with their aesthetic and their clients’ expectations.
         </p>
-        <h3>Want to learn more about our brand?</h3>
-        <button class="read-more-btn" @click="goToAbout">Read About Us</button>
+        <h3>Request our Wholesale Catalog through our contact page.</h3>
+        <button class="read-more-btn" @click="goToAbout">WHOLESALE INQUIRY</button>
       </div>
     </section>
 
@@ -192,26 +192,26 @@ const bestsellers = ref([
 const features = ref([
   {
     id: 1,
-    title: 'Boutique Focused',
-    description: 'Designed exclusively for independent bridal boutiques and specialty retailers.',
+    title: 'Low MOQ',
+    description: 'Support small business with flexible order quantities',
     image: featureImage1
   },
   {
     id: 2,
-    title: 'Timeless Aesthetic',
-    description: 'Refined designs created to remain relevant beyond seasonal trends.',
+    title: 'Fast Shipping',
+    description: '7-15 days worldwide delivery',
     image: featureImage2
   },
   {
     id: 3,
-    title: 'Reliable Production',
-    description: 'Consistent quality control and dependable lead times you can plan around.',
+    title: 'Customization',
+    description: 'Custom lengths and styles available',
     image: featureImage3
   },
   {
     id: 4,
-    title: 'Flexible MOQ',
-    description: 'Wholesale terms that support growing and established boutiques alike.',
+    title: 'High-Quality Fabric',
+    description: 'Soft Italian tulle and premium lace',
     image: featureImage4
   }
 ])
@@ -221,7 +221,7 @@ const goToCollection = (collection) => {
 }
 
 const goToAbout = () => {
-  router.push('/about')
+  router.push('/contact')
 }
 
 onMounted(() => {
@@ -467,7 +467,7 @@ onMounted(() => {
     justify-content: center;
 
     h3 {
-      font-size: 36px;
+      font-size: 33px;
       margin-bottom: 30px;
       font-weight: 400;
       color: #333;
@@ -537,7 +537,7 @@ onMounted(() => {
       
       img {
         width: auto;
-        height: 70px;
+        height: 90px;
         max-width: 100%;
         object-fit: contain;
         transition: transform 0.3s;
@@ -744,14 +744,13 @@ onMounted(() => {
 
     .feature-item {
       .feature-image {
-        height: pxtovw(280);
         display: flex;
         align-items: center;
         justify-content: center;
         padding: pxtovw(30);
-        
+        margin-bottom: pxtovw(10);
         img {
-          height: pxtovw(100);
+          height: pxtovw(120);
           width: auto;
           max-width: 100%;
         }

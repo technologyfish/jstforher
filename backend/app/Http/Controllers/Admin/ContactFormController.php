@@ -21,6 +21,7 @@ class ContactFormController extends Controller
             $query->where(function($q) use ($keyword) {
                 $q->where('name', 'like', "%{$keyword}%")
                   ->orWhere('email', 'like', "%{$keyword}%")
+                  ->orWhere('business_info', 'like', "%{$keyword}%")
                   ->orWhere('phone', 'like', "%{$keyword}%")
                   ->orWhere('subject', 'like', "%{$keyword}%")
                   ->orWhere('message', 'like', "%{$keyword}%");

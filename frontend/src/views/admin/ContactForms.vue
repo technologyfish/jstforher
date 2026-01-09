@@ -17,8 +17,9 @@
       <el-table :data="contactForms.data" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="name" label="姓名" width="150" />
-        <el-table-column prop="email" label="邮箱" width="220" />
-        <el-table-column prop="message" label="留言内容" min-width="250" show-overflow-tooltip />
+        <el-table-column prop="email" label="邮箱" width="200" />
+        <el-table-column prop="business_info" label="Business Name / Website" width="220" show-overflow-tooltip />
+        <el-table-column prop="message" label="留言内容" min-width="200" show-overflow-tooltip />
         <el-table-column prop="is_read" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.is_read ? 'success' : 'warning'">
@@ -61,6 +62,7 @@
         <el-descriptions-item label="ID">{{ currentItem.id }}</el-descriptions-item>
         <el-descriptions-item label="姓名">{{ currentItem.name }}</el-descriptions-item>
         <el-descriptions-item label="邮箱">{{ currentItem.email }}</el-descriptions-item>
+        <el-descriptions-item label="Business Name / Website">{{ currentItem.business_info || '-' }}</el-descriptions-item>
         <el-descriptions-item label="状态">
           <el-tag :type="currentItem.is_read ? 'success' : 'warning'">
             {{ currentItem.is_read ? '已读' : '未读' }}
