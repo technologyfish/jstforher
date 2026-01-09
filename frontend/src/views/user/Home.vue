@@ -527,11 +527,10 @@ onMounted(() => {
     text-align: center;
 
     .feature-image {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       overflow: hidden;
       border-radius: 4px;
       padding: 20px;
-      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;

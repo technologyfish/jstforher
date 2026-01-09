@@ -88,7 +88,7 @@ const handleLogin = async () => {
         localStorage.setItem('admin_token', res.data.token)
         localStorage.setItem('admin_info', JSON.stringify(res.data.admin))
         ElMessage.success('Login successful!')
-        router.push('/admin')
+        router.push('/fanggangrong')
       } catch (error) {
         ElMessage.error('Login failed. Please check your credentials.')
       } finally {

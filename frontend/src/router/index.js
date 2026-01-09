@@ -28,18 +28,18 @@ const routes = [
     ]
   },
   {
-    path: '/admin/login',
+    path: '/fanggangrong/login',
     name: 'AdminLogin',
     component: () => import('@/views/admin/Login.vue')
   },
   {
-    path: '/admin',
+    path: '/fanggangrong',
     component: () => import('@/layouts/AdminLayout.vue'),
     meta: { requiresAuth: true },
     children: [
       {
         path: '',
-        redirect: '/admin/categories'
+        redirect: '/fanggangrong/categories'
       },
       {
         path: 'categories',
@@ -85,9 +85,9 @@ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('admin_token')
   
   if (to.meta.requiresAuth && !token) {
-    next('/admin/login')
-  } else if (to.path === '/admin/login' && token) {
-    next('/admin')
+    next('/fanggangrong/login')
+  } else if (to.path === '/fanggangrong/login' && token) {
+    next('/fanggangrong')
   } else {
     next()
   }

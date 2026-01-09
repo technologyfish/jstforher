@@ -47,8 +47,8 @@ service.interceptors.response.use(
         message = '未授权，请重新登录'
         // 清除 token 并跳转到登录页
         localStorage.removeItem('admin_token')
-        if (window.location.pathname.startsWith('/admin')) {
-          window.location.href = '/admin/login'
+        if (window.location.pathname.startsWith('/fanggangrong')) {
+          window.location.href = '/fanggangrong/login'
         }
       } else if (status === 403) {
         message = '拒绝访问'

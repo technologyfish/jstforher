@@ -114,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { getCategories, getSubCategories } from '@/api/category'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
@@ -132,7 +132,7 @@ const hasMore = ref(false)
 
 // 分页相关
 const currentPage = ref(1)
-const perPage = 9
+const perPage = ref(9) // 改为响应式，默认PC端9个
 const pagination = ref({
   total: 0,
   current_page: 1,
@@ -207,6 +207,35 @@ const currentImages = computed(() => {
   return images.length > 0 ? images : ['https://via.placeholder.com/800x1000']
 })
 
+// 检测是否为移动设备
+const isMobile = () => {
+  return window.innerWidth < 768
+}
+
+// 更新每页显示数量
+const updatePerPage = () => {
+  const newPerPage = isMobile() ? 10 : 9
+  if (perPage.value !== newPerPage) {
+    perPage.value = newPerPage
+    // 重置到第一页并重新加载数据
+    currentPage.value = 1
+    if (selectedCategory.value === null) {
+      loadAllSubCategories()
+    } else {
+      loadSubCategories(selectedCategory.value.id)
+    }
+  }
+}
+
+// 处理窗口大小变化
+let resizeTimer = null
+const handleResize = () => {
+  clearTimeout(resizeTimer)
+  resizeTimer = setTimeout(() => {
+    updatePerPage()
+  }, 300) // 防抖，300ms后执行
+}
+
 const selectCategory = async (category) => {
   selectedCategory.value = category
   // 重置分页
@@ -243,7 +272,7 @@ const loadSubCategories = async (categoryId) => {
     const res = await getSubCategories({ 
       category_id: categoryId,
       page: currentPage.value,
-      per_page: perPage
+      per_page: perPage.value
     })
     
     subCategories.value = res.data || []
@@ -264,7 +293,7 @@ const loadAllSubCategories = async () => {
   try {
     const res = await getSubCategories({
       page: currentPage.value,
-      per_page: perPage
+      per_page: perPage.value
     })
     
     allSubCategories.value = res.data || []
@@ -325,7 +354,20 @@ const hasImages = (subCategory) => {
 }
 
 onMounted(() => {
+  // 初始化时设置perPage
+  updatePerPage()
+  // 添加窗口大小变化监听器
+  window.addEventListener('resize', handleResize)
+  // 加载分类数据
   loadCategories()
+})
+
+onUnmounted(() => {
+  // 清理事件监听器
+  window.removeEventListener('resize', handleResize)
+  if (resizeTimer) {
+    clearTimeout(resizeTimer)
+  }
 })
 </script>
 

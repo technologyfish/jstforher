@@ -9,27 +9,27 @@
         router
         class="sidebar-menu"
       >
-        <el-menu-item index="/admin/categories">
+        <el-menu-item index="/fanggangrong/categories">
           <el-icon><List /></el-icon>
           <span>分类管理</span>
         </el-menu-item>
-        <el-menu-item index="/admin/sub-categories">
+        <el-menu-item index="/fanggangrong/sub-categories">
           <el-icon><Files /></el-icon>
           <span>产品册管理</span>
         </el-menu-item>
-        <el-menu-item index="/admin/articles">
+        <el-menu-item index="/fanggangrong/articles">
           <el-icon><Document /></el-icon>
           <span>图片集管理</span>
         </el-menu-item>
-        <el-menu-item index="/admin/contact-forms">
+        <el-menu-item index="/fanggangrong/contact-forms">
           <el-icon><Message /></el-icon>
           <span>表单留资</span>
         </el-menu-item>
-        <el-menu-item index="/admin/newsletter-subscriptions">
+        <el-menu-item index="/fanggangrong/newsletter-subscriptions">
           <el-icon><Bell /></el-icon>
           <span>订阅列表</span>
         </el-menu-item>
-        <el-menu-item index="/admin/products">
+        <el-menu-item index="/fanggangrong/products">
           <el-icon><ShoppingBag /></el-icon>
           <span>产品管理</span>
         </el-menu-item>
@@ -76,12 +76,12 @@ const adminName = computed(() => {
 
 const pageTitle = computed(() => {
   const titles = {
-    '/admin/categories': '分类管理',
-    '/admin/sub-categories': '产品册管理',
-    '/admin/articles': '图片集管理',
-    '/admin/contact-forms': '表单留资管理',
-    '/admin/newsletter-subscriptions': '订阅列表管理',
-    '/admin/products': '产品管理'
+    '/fanggangrong/categories': '分类管理',
+    '/fanggangrong/sub-categories': '产品册管理',
+    '/fanggangrong/articles': '图片集管理',
+    '/fanggangrong/contact-forms': '表单留资管理',
+    '/fanggangrong/newsletter-subscriptions': '订阅列表管理',
+    '/fanggangrong/products': '产品管理'
   }
   return titles[route.path] || 'Dashboard'
 })
@@ -98,7 +98,7 @@ const handleLogout = async () => {
     localStorage.removeItem('admin_token')
     localStorage.removeItem('admin_info')
     ElMessage.success('已退出登录')
-    router.push('/admin/login')
+    router.push('/fanggangrong/login')
   } catch (error) {
     // 用户取消
   }
