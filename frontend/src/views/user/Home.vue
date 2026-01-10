@@ -30,6 +30,8 @@
       <p class="section-description">
         JST FOR HER designs bridal veils with a focus on timeless elegance and modern simplicity. Each style is carefully considered to enhance the bride’s overall look, offering softness, balance, and graceful movement. Our aesthetic values restraint, comfort, and versatility, allowing boutiques to present veils that feel elevated, confident, and beautifully understated for the wedding day and beyond.
       </p>
+<!--      <p class="section-description">(Min Order: Starts from 2 pieces (mixed style). Production: 7-15 days.)</p>-->
+
     </section>
 
     <!-- Collections Section with Swiper -->

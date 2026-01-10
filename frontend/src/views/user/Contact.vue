@@ -3,10 +3,17 @@
     <div class="contact-container">
       <!-- Left Section - Form -->
       <div class="contact-form-section">
-        <h2 class="contact-title">Get in touch</h2>
+        <h2 class="contact-title">Work With Us</h2>
 
-        <p class="form-intro">Looking to carry JSTforher in your boutique? We love partnering with bridal shops and independent designers worldwide. Drop us a message for our latest Wholesale Catalog.</p>
+        <p class="form-intro mb-20">We're excited to partner with boutiques that share our passion for refined bridal elegance. Whether you have a quick question or are ready to request a catalog, drop us a message below.</p>
+        <p class="form-intro font-weight-bold">Quick Terms:</p>
+        <p class="form-intro term-item"><strong>MOQ：</strong> Starts from 2 pieces (mixed styles).</p>
+        <p class="form-intro term-item"><strong>Lead Time：</strong> 7-15 business days.</p>
+        <p class="form-intro term-item mb-20"><strong>Worldwide Shipping：</strong> DHL/FedEx/UPS Express.</p>
 
+<!--        <p class="form-intro mb-20">-->
+<!--          (Min Order: Starts from 2 pieces (mixed style). Production: 7-15 days.)-->
+<!--        </p>-->
         <form class="contact-form" @submit.prevent="handleSubmit">
           <div class="form-row">
             <div class="form-group">
@@ -71,17 +78,17 @@
     </div>
 
     <!-- Info Section -->
-    <div class="info-section">
-      <h2 class="info-title">Refined Bridal Veils & Accessories</h2>
-      <p class="info-description">
-        JST FOR HER designs bridal veils with a focus on timeless elegance and modern simplicity. Each style is carefully considered to enhance the bride's overall look, offering balance, grace, and graceful movement. Our aesthetic values restraint, comfort, and versatility, allowing boutiques to present veils that feel elevated, confident, and beautifully understated for the wedding day and beyond.
-      </p>
-      <div class="moq-info">
-        <h3 class="moq-title">Low MOQ & Lead Time</h3>
-        <p class="moq-detail"><strong>Min Order:</strong> Starts from 2 pieces (mixed style).</p>
-        <p class="moq-detail"><strong>Production:</strong> 7-15 days.</p>
-      </div>
-    </div>
+<!--    <div class="info-section">-->
+<!--      <h2 class="info-title">Refined Bridal Veils & Accessories</h2>-->
+<!--      <p class="info-description">-->
+<!--        JST FOR HER designs bridal veils with a focus on timeless elegance and modern simplicity. Each style is carefully considered to enhance the bride's overall look, offering balance, grace, and graceful movement. Our aesthetic values restraint, comfort, and versatility, allowing boutiques to present veils that feel elevated, confident, and beautifully understated for the wedding day and beyond.-->
+<!--      </p>-->
+<!--&lt;!&ndash;      <div class="moq-info">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h3 class="moq-title">Low MOQ & Lead Time</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p class="moq-detail"><strong>Min Order:</strong> Starts from 2 pieces (mixed style).</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p class="moq-detail"><strong>Production:</strong> 7-15 days.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -157,7 +164,7 @@ const handleSubmit = async () => {
     font-size: 32px;
     font-weight: 400;
     color: #333;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .contact-info-text {
@@ -210,12 +217,38 @@ const handleSubmit = async () => {
 
   .form-intro {
     font-size: 15px;
-    line-height: 1.8;
-    color: #666;
-    margin-bottom: 40px;
+    line-height: 2;
+    color: #333;
+    //margin-bottom: 10px;
+  }
+
+  .term-item {
+    position: relative;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #333;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    strong {
+      font-weight: 600;
+      color: #333;
+    }
+  }
+  
+  .mb-20{
+    margin-bottom: 10px;
   }
 
   .contact-form {
+    margin-top: 20px;
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -375,11 +408,23 @@ const handleSubmit = async () => {
     .form-intro {
       font-size: pxtovw(28);
       line-height: 1.8;
-      margin-bottom: pxtovw(30);
+      //margin-bottom: pxtovw(10);
 
       br {
         display: none;
       }
+    }
+
+    .term-item {
+      padding-left: pxtovw(30);
+
+      &::before {
+        font-size: pxtovw(32);
+      }
+    }
+
+    .mb-20{
+      margin-bottom: pxtovw(20);
     }
 
     .contact-form {
@@ -456,6 +501,9 @@ const handleSubmit = async () => {
       }
     }
   }
+}
+.font-weight-bold{
+  font-weight: bold;
 }
 </style>
 
