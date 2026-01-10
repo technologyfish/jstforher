@@ -6,7 +6,7 @@
         <h2 class="contact-title">Work With Us</h2>
 
         <p class="form-intro mb-20">We're excited to partner with boutiques that share our passion for refined bridal elegance. Whether you have a quick question or are ready to request a catalog, drop us a message below.</p>
-        <p class="form-intro font-weight-bold">Quick Terms:</p>
+<!--        <p class="form-intro font-weight-bold">Quick Terms:</p>-->
         <p class="form-intro term-item"><strong>MOQ：</strong> Starts from 2 pieces (mixed styles).</p>
         <p class="form-intro term-item"><strong>Lead Time：</strong> 7-15 business days.</p>
         <p class="form-intro term-item mb-20"><strong>Worldwide Shipping：</strong> DHL/FedEx/UPS Express.</p>
@@ -224,18 +224,18 @@ const handleSubmit = async () => {
 
   .term-item {
     position: relative;
-    padding-left: 10px;
+    //padding-left: 10px;
     display: flex;
     align-items: center;
 
-    &::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: #333;
-      font-size: 18px;
-      line-height: 1.8;
-    }
+    //&::before {
+    //  content: '•';
+    //  position: absolute;
+    //  left: 0;
+    //  color: #333;
+    //  font-size: 18px;
+    //  line-height: 1.8;
+    //}
 
     strong {
       font-weight: 600;
