@@ -14,18 +14,25 @@ class ContactController extends Controller
     public function submit(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:100',
-            'business_info' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:50',
-            'subject' => 'nullable|string|max:200',
-            'message' => 'nullable|string'
+            'first_name'        => 'required|string|max:100',
+            'last_name'         => 'required|string|max:100',
+            'email'             => 'required|email|max:100',
+            'business_info'     => 'nullable|string|max:255',
+            'location'          => 'nullable|string|max:200',
+            'estimated_quantity' => 'nullable|string|max:100',
+            'message'           => 'nullable|string',
         ]);
 
-        $data = $request->only(['name', 'email', 'business_info', 'phone', 'subject', 'message']);
+        $data = $request->only([
+            'first_name', 'last_name', 'email',
+            'business_info', 'location', 'estimated_quantity', 'message',
+        ]);
+
+        // 同时保留组合 name 字段（向后兼容）
+        $data['name']       = trim($data['first_name'] . ' ' . $data['last_name']);
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->header('User-Agent');
-        $data['message'] = $data['message'] ?? ''; // 如果message为空，设置为空字符串
+        $data['message']    = $data['message'] ?? '';
 
         $contactForm = ContactForm::create($data);
 
@@ -34,8 +41,7 @@ class ContactController extends Controller
         return response()->json([
             'success' => true,
             'message' => '提交成功，我们会尽快与您联系',
-            'data' => $contactForm
+            'data'    => $contactForm,
         ], 201);
     }
 }
-

@@ -6,19 +6,34 @@
           <img :src="designerImage" alt="About the Designer" />
         </div>
         <div class="designer-content">
-          <h2>Expert Craftsmanship, Small Studio Heart</h2>
+          <h2>Expert Craftsmanship, Small Studio Focus</h2>
           <p>
-
-            <span style="font-weight: bold;color: #333">The Story</span> <br/>At Jstforher, we don’t just manufacture veils; we craft them.Our founder is a master artisan with over 10 years of experience in the delicate art of bridal millinery. What started as a passion for fine lace and ethereal tulle has grown into a specialized studio dedicated to the highest standards of quality.           </p>
-          <p>
-            <span style="font-weight: bold;color: #333">The Team & Artistry</span> <br/>We are not a mass-production factory.Our studio is a close-knit team of three: our founder and two highly skilled senior tailors. Every stitch, every bead, and every lace appliqué is handled by experts who understand the soul of a garment. Unlike assembly-line products, each Jstforher veil is treated as a piece of art. Because we are small, we are meticulous. Because we are experts, we are efficient. This allows us to offer couture-level quality at a price that makes sense for independent boutiques.
+            <span style="font-weight: bold;color: #333">Our Story</span><br/>
+            At Jstforher, we don't just manufacture veils — we craft them.<br/>
+            Founded by a master artisan with over 10 years of experience in bridal millinery, our studio was built on a passion for fine lace and ethereal tulle. What began as a dedication to craftsmanship has grown into a specialized atelier serving bridal boutiques worldwide with consistent, high-quality production.
           </p>
-         <p>
-           <span style="font-weight: bold;color: #333">Our Commitment</span> <br/> Personal Responsibility, Professional Results.When you partner with us, you are speaking directly to the makers. Our founder personally oversees the quality control of every single order, ensuring that what reaches your boutique is nothing short of perfection. We take pride in our reliability, our transparent communication, and our unwavering commitment to your success.
-         </p>
-
+          <p>
+            <span style="font-weight: bold;color: #333">Our Studio & Craft</span><br/>
+            We are not a mass-production factory.<br/>
+            Our team is intentionally small — a founder and two senior artisans — each with years of hands-on experience. Every veil is made with precision and care, from stitching to lace placement and finishing details.<br/>
+            This structure allows us to maintain:
+            <br/>· Consistent quality across every order
+            <br/>· Attention to fine details often lost in large-scale production
+            <br/>· Efficient turnaround without compromising craftsmanship
+            <br/>For our partners, this means reliable, boutique-level quality at scalable wholesale pricing.
+          </p>
+          <p>
+            <span style="font-weight: bold;color: #333">Our Commitment to Partners</span><br/>
+            When you work with us, you work directly with the makers.<br/>
+            Every order is personally reviewed by our founder to ensure it meets our quality standards before shipment. We prioritize:
+            <br/>· Clear and responsive communication
+            <br/>· Consistent product quality
+            <br/>· On-time delivery you can depend on
+            <br/>We understand what boutiques need — not just beautiful products, but a partner they can trust.
+          </p>
           <p class="see-more">
-            "Every veil tells a story. After a decade of working with delicate tulle and lace, I still personally oversee every piece that leaves our studio. To me, it’s not just a business—it’s a commitment to your boutique and your brides." — Janet, Founder of Jstforher
+            "Every veil tells a story. After more than a decade working with lace and tulle, I still personally oversee every piece we produce. For me, this is not just a business — it's a responsibility to the boutiques and brides we serve."<br/>
+            — Janet, Founder
           </p>
         </div>
       </section>

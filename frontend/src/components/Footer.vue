@@ -8,10 +8,7 @@
             JST FOR HER
           </h3>
           <p class="brand-description">
-            A bridal veil brand offering curated designs<br />
-            for modern bridal boutiques.<br />
-            We value quality, consistency, and craftsmanship,<br />
-            creating veils designed to elevate every bridal look.
+            Designed for independent bridal boutiques in North America & Europe
           </p>
           
           <!-- Links under brand info -->

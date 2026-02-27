@@ -60,7 +60,7 @@
               :key="subCategory.id"
               class="sub-category-item"
               :class="{ 'no-images': !hasImages(subCategory) }"
-              @click="hasImages(subCategory) ? openGallery(subCategory) : null"
+              @click="hasImages(subCategory) ? goToDetail(subCategory) : null"
             >
               <div class="sub-category-image">
                 <img :src="subCategory.cover_image || 'https://via.placeholder.com/400x500'" :alt="subCategory.name" />
@@ -115,8 +115,11 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { getCategories, getSubCategories } from '@/api/category'
 import VueEasyLightbox from 'vue-easy-lightbox'
+
+const router = useRouter()
 
 const loading = ref(false)
 const loadingMore = ref(false)
@@ -310,12 +313,14 @@ const loadAllSubCategories = async () => {
   }
 }
 
+const goToDetail = (subCategory) => {
+  router.push({ name: 'ProductDetail', params: { id: subCategory.id } })
+}
+
 const openGallery = async (subCategory) => {
-  // 检查是否有图片集
   if (!subCategory.articles || subCategory.articles.length === 0) {
     return
   }
-  
   currentSubCategory.value = subCategory
   currentImageIndex.value = 0
   showGallery.value = true

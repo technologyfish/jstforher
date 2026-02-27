@@ -35,6 +35,7 @@
               v-if="row.cover_image"
               :src="row.cover_image"
               :preview-src-list="[row.cover_image]"
+              :preview-teleported="true"
               fit="cover"
               style="width: 60px; height: 60px"
             />
@@ -126,12 +127,21 @@
         </el-form-item>
 
         <el-form-item label="产品册描述" prop="description">
-          <el-input
-            v-model="formData.description"
-            type="textarea"
-            :rows="4"
-            placeholder="请输入产品册描述"
-          />
+          <div style="border: 1px solid #dcdfe6; width: 100%;">
+            <Toolbar
+              :editor="editorRef"
+              :defaultConfig="toolbarConfig"
+              mode="default"
+              style="border-bottom: 1px solid #dcdfe6;"
+            />
+            <Editor
+              v-model="formData.description"
+              :defaultConfig="editorConfig"
+              mode="default"
+              style="height: 260px; overflow-y: hidden;"
+              @onCreated="handleEditorCreated"
+            />
+          </div>
         </el-form-item>
 
         <el-form-item label="排序" prop="sort_order">
@@ -155,7 +165,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onBeforeUnmount, shallowRef } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { getCategoryList } from '@/api/admin/category'
@@ -166,6 +176,23 @@ import {
   deleteSubCategory
 } from '@/api/admin/category'
 import { uploadImage } from '@/api/admin/upload'
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import '@wangeditor/editor/dist/css/style.css'
+
+// WangEditor
+const editorRef = shallowRef(null)
+const toolbarConfig = {}
+const editorConfig = { placeholder: '请输入产品册描述...' }
+
+const handleEditorCreated = (editor) => {
+  editorRef.value = editor
+}
+
+onBeforeUnmount(() => {
+  if (editorRef.value) {
+    editorRef.value.destroy()
+  }
+})
 
 const loading = ref(false)
 const submitLoading = ref(false)

@@ -16,6 +16,11 @@ const routes = [
         component: () => import('@/views/user/Lookbook.vue')
       },
       {
+        path: 'lookbook/:id',
+        name: 'ProductDetail',
+        component: () => import('@/views/user/ProductDetail.vue')
+      },
+      {
         path: 'about',
         name: 'About',
         component: () => import('@/views/user/About.vue')

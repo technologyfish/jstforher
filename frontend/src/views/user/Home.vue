@@ -12,10 +12,9 @@
     <section class="hero-section">
       <div class="hero-content">
         <div class="hero-text">
-          <h1 class="hero-title">Refined Bridal Veils <br />for Boutique Partners</h1>
+          <h1 class="hero-title">Refined Bridal Veils for Boutique Partners & Wholesale Buyers</h1>
           <p class="hero-description">
-            Timeless elegance and curated collections<br />
-            for independent bridal boutiques.
+            Designed to be both visually refined and commercially versatile for boutique retail.
           </p>
         </div>
         <div class="hero-image">
@@ -77,6 +76,7 @@
           </svg>
         </div>
       </div>
+      <p class="collections-footnote">Designed for independent bridal boutiques in North America & Europe</p>
     </section>
 
     <!-- Fashion Section - Left Image Right Text -->
@@ -87,10 +87,11 @@
       <div class="fashion-content">
         <h3>Quality Bridal Veils, Crafted for Boutiques</h3>
         <p>
-          Jstforher is built around long-term wholesale partnerships. We focus on creating bridal veil collections that are refined, dependable, and designed for the modern bride. By offering low MOQs, reliable lead times, and clear communication, we empower boutiques to offer exquisite veils that align perfectly with their aesthetic and their clients’ expectations.
+          JST FOR HER is built around long-term wholesale partnerships. We focus on creating bridal veil collections that are refined, dependable, and designed for the modern bride. By offering low MOQs, reliable lead times, and clear communication, we empower boutiques to offer exquisite veils that align perfectly with their aesthetic and their clients’ expectations.
         </p>
-        <h3>Request our Wholesale Catalog through our contact page.</h3>
-        <button class="read-more-btn" @click="goToAbout">WHOLESALE INQUIRY</button>
+        <h3>Get Access to Our Full Bridal Veil Catalog</h3>
+        <h4>(50+ Styles | Wholesale Pricing | Custom Options)</h4>
+        <button class="read-more-btn" @click="goToAbout">REQUEST CATALOG</button>
       </div>
     </section>
 
@@ -115,20 +116,36 @@
     <!-- How to Working Us Section -->
     <section class="working-section">
       <div class="working-content">
-        <h4 class="working-subtitle">How to Work With Us</h4>
+        <h4 class="working-subtitle">How to Start Working With Us</h4>
         <div class="working-steps">
+
           <div class="step-item">
             <span class="step-number">1</span>
-            <p class="step-text">Submit your wholesale inquiry and tell us about your boutique.</p>
+            <div class="step-text-box">
+              <p class="step-text-bold">Tell Us About Your Boutique</p>
+              <p class="step-text">Submit your inquiry and share your style, price range, and needs.</p>
+            </div>
           </div>
+
           <div class="step-item">
             <span class="step-number">2</span>
-            <p class="step-text">Receive curated selections, pricing, and detailed information.</p>
+            <div class="step-text-box">
+                <p class="step-text-bold">Get Your Curated Selection</p>
+                <p class="step-text">We’ll send you suitable styles, pricing, and full details.</p>
+            </div>
           </div>
+
           <div class="step-item">
             <span class="step-number">3</span>
-            <p class="step-text">Place your order and build a long-term partnership with us.</p>
+            <div class="step-text-box">
+              <p class="step-text-bold">Start with Confidence</p>
+              <p class="step-text">Place your first order and grow with a reliable partner.</p>
+            </div>
           </div>
+        </div>
+        <div class="working-cta">
+          <p class="cta-text">Ready to explore our collection?</p>
+          <p class="cta-subtext">Request your wholesale catalog <button class="catalog-btn" @click="goToAbout">REQUEST CATALOG</button></p>
         </div>
       </div>
       <div class="working-image">
@@ -194,26 +211,26 @@ const bestsellers = ref([
 const features = ref([
   {
     id: 1,
-    title: 'Low MOQ',
-    description: 'Support small business with flexible order quantities',
+    title: 'Low MOQ, Built for Boutiques',
+    description: 'Flexible quantities designed for independent bridal stores — no overstock pressure.',
     image: featureImage1
   },
   {
     id: 2,
-    title: 'Fast Shipping',
-    description: '7-15 days worldwide delivery',
+    title: 'Reliable Lead Times',
+    description: 'Consistent 7–15 day delivery you can plan around.',
     image: featureImage2
   },
   {
     id: 3,
-    title: 'Customization',
-    description: 'Custom lengths and styles available',
+    title: 'Easy Customization',
+    description: 'Adjust lengths, layers, and details to suit your collection.',
     image: featureImage3
   },
   {
     id: 4,
-    title: 'High-Quality Fabric',
-    description: 'Soft Italian tulle and premium lace',
+    title: 'Refined, Consistent Quality',
+    description: 'Carefully selected materials with stable craftsmanship across every order.',
     image: featureImage4
   }
 ])
@@ -269,7 +286,6 @@ onMounted(() => {
 // Hero Section - Left Text Right Image
 .hero-section {
   width: 100%;
-  background: #DEDDE2;
   padding: 0;
 
   .hero-content {
@@ -284,12 +300,17 @@ onMounted(() => {
     flex: 0 0 50%;
     width: 50%;
     padding: 80px 100px;
+    background: linear-gradient(to right, #B8B9B3 0%, #8B9088 50%, #68756D 100%);
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .hero-title {
       font-size: 48px;
       line-height: 1.3;
       font-weight: 400;
-      color: #333;
+      color: #ffffff;
       margin-bottom: 30px;
       font-family: 'Georgia', serif;
     }
@@ -297,7 +318,7 @@ onMounted(() => {
     .hero-description {
       font-size: 16px;
       line-height: 1.8;
-      color: #666;
+      color: #f5f5f5;
     }
   }
 
@@ -356,6 +377,14 @@ onMounted(() => {
     font-size: 16px;
     color: #666;
     margin-bottom: 45px;
+    font-weight: 300;
+  }
+
+  .collections-footnote {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-top: 80px;
     font-weight: 300;
   }
 
@@ -470,12 +499,17 @@ onMounted(() => {
 
     h3 {
       font-size: 33px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       font-weight: 400;
       color: #333;
       line-height: 1.3;
     }
-
+    h4 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      font-weight: 400;
+      color: #666;
+    }
     p {
       font-size: 16px;
       line-height: 1.9;
@@ -521,7 +555,7 @@ onMounted(() => {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 50px;
-    max-width: 1000px;
+    max-width: 1050px;
     margin: 0 auto;
   }
 
@@ -605,30 +639,79 @@ onMounted(() => {
 
     .step-item {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 20px;
 
       .step-number {
         flex-shrink: 0;
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         background: #333;
         color: $white;
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
+        line-height: 20px;
+        display: block;
+        text-align: center;
+        font-size: 14px;
         font-weight: 500;
       }
 
       .step-text {
         flex: 1;
         font-size: 16px;
-        line-height: 1.8;
+        //line-height: 1.8;
         color: #666;
         margin: 0;
         padding-top: 4px;
+      }
+      .step-text-bold{
+        font-weight: bold;
+        flex: 1;
+        font-size: 16px;
+        //line-height: 1.8;
+        color: #666;
+        margin: 0;
+        padding-top: 4px;
+      }
+    }
+
+    .working-cta {
+      margin-top: 50px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+      .cta-text {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: 400;
+      }
+
+      .cta-subtext {
+        font-size: 24px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .catalog-btn {
+          background: #333;
+          color: $white;
+          border: none;
+          padding: 12px 30px;
+          font-size: 13px;
+          font-weight: 400;
+          cursor: pointer;
+          transition: all 0.3s;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-left: 5px;
+
+          &:hover {
+            background: #000;
+            transform: translateY(-2px);
+          }
+        }
       }
     }
   }
@@ -663,16 +746,20 @@ onMounted(() => {
       width: 100%;
       padding: pxtovw(80) pxtovw(40);
       text-align: center;
+      background: linear-gradient(to bottom, #B8B9B3 0%, #8B9088 50%, #5B655A 100%);
+      min-height: pxtovw(600);
 
       .hero-title {
         font-size: pxtovw(52);
         line-height: 1.3;
         margin-bottom: pxtovw(30);
+        color: #ffffff;
       }
 
       .hero-description {
         font-size: pxtovw(28);
         line-height: 1.6;
+        color: #f5f5f5;
       }
     }
 
@@ -795,14 +882,40 @@ onMounted(() => {
 
       .step-item {
         .step-number {
-          width: pxtovw(50);
-          height: pxtovw(50);
+          width: pxtovw(32);
+          height: pxtovw(32);
           font-size: pxtovw(24);
         }
 
         .step-text {
           font-size: pxtovw(28);
-          line-height: 1.6;
+        }
+        .step-text-bold {
+          font-size: pxtovw(28);
+          font-weight: bold;
+        }
+      }
+
+      .working-cta {
+        margin-top: pxtovw(60);
+        padding-top: pxtovw(40);
+
+        .cta-text {
+          font-size: pxtovw(32);
+          margin-bottom: pxtovw(15);
+        }
+
+        .cta-subtext {
+          font-size: pxtovw(30);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: pxtovw(15);
+
+          .catalog-btn {
+            padding: pxtovw(20) pxtovw(40);
+            font-size: pxtovw(22);
+            margin-left: 0;
+          }
         }
       }
     }
@@ -829,6 +942,11 @@ onMounted(() => {
     .collections-subtitle {
       font-size: pxtovw(26);
       margin-bottom: pxtovw(60);
+    }
+
+    .collections-footnote {
+      font-size: pxtovw(24);
+      margin-top: pxtovw(80);
     }
 
     .collection-item .collection-image img,

@@ -166,13 +166,22 @@
           </div>
         </el-form-item>
 
-        <el-form-item label="图片集描述" prop="description">
-          <el-input
-            v-model="formData.description"
-            type="textarea"
-            :rows="3"
-            placeholder="请输入图片集描述"
-          />
+        <el-form-item label="图片集简介" prop="description">
+          <div style="border: 1px solid #dcdfe6; width: 100%;">
+            <Toolbar
+              :editor="editorRef"
+              :defaultConfig="toolbarConfig"
+              mode="default"
+              style="border-bottom: 1px solid #dcdfe6;"
+            />
+            <Editor
+              v-model="formData.description"
+              :defaultConfig="editorConfig"
+              mode="default"
+              style="height: 260px; overflow-y: hidden;"
+              @onCreated="handleEditorCreated"
+            />
+          </div>
         </el-form-item>
 
         <el-form-item label="图片集内容" prop="content">
@@ -205,7 +214,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, onBeforeUnmount, shallowRef } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { getCategoryList, getSubCategoryList } from '@/api/admin/category'
@@ -216,6 +225,15 @@ import {
   deleteArticle
 } from '@/api/admin/article'
 import { uploadImage } from '@/api/admin/upload'
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import '@wangeditor/editor/dist/css/style.css'
+
+// WangEditor
+const editorRef = shallowRef(null)
+const toolbarConfig = {}
+const editorConfig = { placeholder: '请输入图片集简介...' }
+const handleEditorCreated = (editor) => { editorRef.value = editor }
+onBeforeUnmount(() => { editorRef.value?.destroy() })
 
 const loading = ref(false)
 const submitLoading = ref(false)
