@@ -8,7 +8,7 @@
             JST FOR HER
           </h3>
           <p class="brand-description">
-            Designed for independent bridal boutiques in North America & Europe
+            Designed for boutiques across North America & Europe
           </p>
           
           <!-- Links under brand info -->

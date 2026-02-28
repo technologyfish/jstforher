@@ -23,14 +23,16 @@
         <img src="@/assets/images/logo.png" alt="NEA·MILANO" class="logo-image" />
       </router-link>
 
-      <!-- Right Social Icons (Desktop) -->
+      <!-- Right Area (Desktop) -->
       <div class="social-icons">
-        <a href="https://instagram.com" target="_blank" class="icon-link">
-          <img src="@/assets/images/instagram.png" alt="Instagram" />
-        </a>
-        <a href="https://facebook.com" target="_blank" class="icon-link">
-          <img src="@/assets/images/facebook.png" alt="Facebook" />
-        </a>
+        <span class="nav-email">info@jstforher.com</span>
+        <router-link to="/contact" class="nav-catalog-link">REQUEST CATALOG</router-link>
+<!--        <a href="https://instagram.com" target="_blank" class="icon-link">-->
+<!--          <img src="@/assets/images/instagram.png" alt="Instagram" />-->
+<!--        </a>-->
+<!--        <a href="https://facebook.com" target="_blank" class="icon-link">-->
+<!--          <img src="@/assets/images/facebook.png" alt="Facebook" />-->
+<!--        </a>-->
       </div>
     </div>
 
@@ -203,13 +205,41 @@ watch(currentRoute, () => {
   }
 }
 
-// 右侧社交图标 (Desktop)
+// 右侧区域 (Desktop)
 .social-icons {
   display: flex;
   gap: 20px;
   align-items: center;
   flex: 1;
   justify-content: flex-end;
+
+  .nav-email {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: color 0.3s;
+    white-space: nowrap;
+
+  }
+
+  .nav-catalog-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    //border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    transition: color 0.3s;
+    white-space: nowrap;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
 
   .icon-link {
     width: 24px;

@@ -12,9 +12,9 @@
     <section class="hero-section">
       <div class="hero-content">
         <div class="hero-text">
-          <h1 class="hero-title">Refined Bridal Veils for Boutique Partners & Wholesale Buyers</h1>
+          <h1 class="hero-title">Refined Bridal Veils for Boutique Partners</h1>
           <p class="hero-description">
-            Designed to be both visually refined and commercially versatile for boutique retail.
+            Designed to be easy to sell, reliable to stock, and aligned with boutique aesthetics.
           </p>
         </div>
         <div class="hero-image">
@@ -36,7 +36,7 @@
     <!-- Collections Section with Swiper -->
     <section class="collections-section">
       <h3 class="collections-title">A Curated Selection</h3>
-      <p class="collections-subtitle">Discover more styles in our Lookbook.</p>
+      <p class="collections-subtitle">Discover styles designed to sell in modern bridal boutiques.</p>
       <div class="swiper-container">
         <swiper
           :modules="modules"
@@ -76,7 +76,7 @@
           </svg>
         </div>
       </div>
-      <p class="collections-footnote">Designed for independent bridal boutiques in North America & Europe</p>
+      <p class="collections-footnote">Designed for boutiques across North America & Europe</p>
     </section>
 
     <!-- Fashion Section - Left Image Right Text -->

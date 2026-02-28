@@ -85,6 +85,8 @@
       :imgs="allImages"
       :index="lightboxIndex"
       @hide="showLightbox = false"
+      @on-prev="triggerZoom"
+      @on-next="triggerZoom"
     />
   </div>
 </template>
@@ -135,19 +137,22 @@ const openLightbox = (index) => {
   showLightbox.value = true
 }
 
-// 打开 lightbox 后自动触发一次 zoom-in
+// 触发一次 zoom-in
+const triggerZoom = () => {
+  nextTick(() => {
+    setTimeout(() => {
+      // toolbar-btn 顺序：zoom-in(0), zoom-out(1), resize(2), rotate-left(3), rotate-right(4)
+      const btns = document.querySelectorAll('.vel-toolbar .toolbar-btn')
+      if (btns && btns[0]) {
+        btns[0].click() // zoom-in 一次
+      }
+    }, 150)
+  })
+}
+
+// 打开 lightbox 时触发
 watch(showLightbox, (val) => {
-  if (val) {
-    nextTick(() => {
-      setTimeout(() => {
-        // toolbar-btn 顺序：zoom-in(0), zoom-out(1), resize(2), rotate-left(3), rotate-right(4)
-        const btns = document.querySelectorAll('.vel-toolbar .toolbar-btn')
-        if (btns && btns[0]) {
-          btns[0].click() // zoom-in 一次
-        }
-      }, 150)
-    })
-  }
+  if (val) triggerZoom()
 })
 
 onMounted(async () => {
