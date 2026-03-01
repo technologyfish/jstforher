@@ -961,9 +961,32 @@ onMounted(() => {
     }
   }
 
-  .swiper-container :deep(.swiper-button-prev),
-  .swiper-container :deep(.swiper-button-next) {
-    display: none;
+  .swiper-container .swiper-button-prev,
+  .swiper-container .swiper-button-next {
+    display: flex !important;
+    width: pxtovw(60) !important;
+    height: pxtovw(60) !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+    border-radius: 50% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+
+    svg {
+      width: pxtovw(28) !important;
+      height: pxtovw(28) !important;
+    }
+  }
+
+  .swiper-container .swiper-button-prev {
+    left: pxtovw(-10) !important;
+  }
+
+  .swiper-container .swiper-button-next {
+    right: pxtovw(-10) !important;
   }
 }
 </style>
