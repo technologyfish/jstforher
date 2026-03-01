@@ -24,13 +24,13 @@
 
           <div class="form-group">
             <label for="firstName">Name <span class="required">*</span></label>
-            <input type="text" id="firstName" v-model="formData.firstName" />
+            <input type="text" id="firstName" ref="firstNameRef" v-model="formData.firstName" @input="errors.firstName = formData.firstName.trim() ? '' : 'Please enter your name so we can get in touch.'" />
             <p v-if="errors.firstName" class="field-error">{{ errors.firstName }}</p>
           </div>
 
           <div class="form-group">
             <label for="email">Email <span class="required">*</span></label>
-            <input type="email" id="email" v-model="formData.email" />
+            <input type="email" id="email" ref="emailRef" v-model="formData.email" @input="errors.email = formData.email.trim() ? '' : 'Please enter a valid email address.'" />
             <p v-if="errors.email" class="field-error">{{ errors.email }}</p>
           </div>
 
@@ -88,12 +88,14 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
 import { submitContactForm } from '@/api/contact'
 import contactImage from '@/assets/images/img-8.png'
 
 const loading = ref(false)
+const firstNameRef = ref(null)
+const emailRef = ref(null)
 
 const formData = reactive({
   firstName: '',
@@ -109,30 +111,40 @@ const errors = reactive({
   email: ''
 })
 
-const validate = () => {
+const validate = async () => {
   errors.firstName = ''
   errors.email = ''
   let valid = true
+  let firstErrorRef = null
 
   if (!formData.firstName.trim()) {
     errors.firstName = 'Please enter your name so we can get in touch.'
     valid = false
+    firstErrorRef = firstNameRef
   }
 
   const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!formData.email.trim()) {
     errors.email = 'Please enter a valid email address.'
+    if (!firstErrorRef) firstErrorRef = emailRef
     valid = false
   } else if (!emailReg.test(formData.email.trim())) {
     errors.email = 'Please enter a valid email address.'
+    if (!firstErrorRef) firstErrorRef = emailRef
     valid = false
+  }
+
+  if (firstErrorRef) {
+    await nextTick()
+    firstErrorRef.value?.focus()
+    firstErrorRef.value?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   return valid
 }
 
 const handleSubmit = async () => {
-  if (!validate()) return
+  if (!await validate()) return
 
   loading.value = true
   try {
