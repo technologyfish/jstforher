@@ -25,14 +25,9 @@
 
       <!-- Right Area (Desktop) -->
       <div class="social-icons">
-        <span class="nav-email">info@jstforher.com</span>
-        <router-link to="/contact" class="nav-catalog-link">REQUEST CATALOG</router-link>
-<!--        <a href="https://instagram.com" target="_blank" class="icon-link">-->
-<!--          <img src="@/assets/images/instagram.png" alt="Instagram" />-->
-<!--        </a>-->
-<!--        <a href="https://facebook.com" target="_blank" class="icon-link">-->
-<!--          <img src="@/assets/images/facebook.png" alt="Facebook" />-->
-<!--        </a>-->
+        <span class="nav-email">Email: info@jstforher.com</span>
+        <span class="nav-divider">|</span>
+        <router-link to="/contact" class="nav-catalog-link">Request Catalog</router-link>
       </div>
     </div>
 
@@ -57,12 +52,8 @@
           </ul>
 
           <div class="sidebar-social">
-            <a href="https://instagram.com" target="_blank" class="icon-link">
-              <img src="@/assets/images/instagram.png" alt="Instagram" />
-            </a>
-            <a href="https://facebook.com" target="_blank" class="icon-link">
-              <img src="@/assets/images/facebook.png" alt="Facebook" />
-            </a>
+            <span class="sidebar-email">Email: info@jstforher.com</span>
+            <router-link to="/contact" class="sidebar-catalog-link" @click="closeMenu">Request Catalog</router-link>
           </div>
         </div>
       </div>
@@ -224,17 +215,20 @@ watch(currentRoute, () => {
 
   }
 
+  .nav-divider {
+    color: #ccc;
+    font-size: 13px;
+    user-select: none;
+  }
+
   .nav-catalog-link {
     text-decoration: none;
     color: #333;
     font-size: 13px;
     font-weight: 400;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    //border-bottom: 1px solid currentColor;
-    padding-bottom: 1px;
-    transition: color 0.3s;
+    letter-spacing: 0.3px;
     white-space: nowrap;
+    transition: color 0.3s;
 
     &:hover {
       color: $primary-color;
@@ -345,22 +339,27 @@ watch(currentRoute, () => {
 
 .sidebar-social {
   display: flex;
-  gap: pxtovw(30);
-  align-items: center;
+  flex-direction: column;
+  gap: pxtovw(20);
   padding-top: pxtovw(40);
   border-top: 1px solid #e5e5e5;
-  
-  .icon-link {
-    width: pxtovw(40);
-    height: pxtovw(40);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+
+  .sidebar-email {
+    font-size: pxtovw(26);
+    color: #333;
+    font-weight: 400;
+  }
+
+  .sidebar-catalog-link {
+    text-decoration: none;
+    font-size: pxtovw(26);
+    color: #333;
+    font-weight: 400;
+    transition: color 0.3s;
+
+    &:hover,
+    &.active {
+      color: $primary-color;
     }
   }
 }

@@ -17,15 +17,9 @@
       <el-table :data="contactForms.data" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="60" />
 
-        <!-- 姓名：优先显示 first_name+last_name，兼容旧数据的 name 字段 -->
-        <el-table-column label="First Name" width="120">
+        <el-table-column label="Name" width="150">
           <template #default="{ row }">
-            {{ row.first_name || (row.name ? row.name.split(' ')[0] : '-') }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Last Name" width="120">
-          <template #default="{ row }">
-            {{ row.last_name || (row.name ? row.name.split(' ').slice(1).join(' ') : '-') || '-' }}
+            {{ row.first_name || row.name || '-' }}
           </template>
         </el-table-column>
 
@@ -80,11 +74,8 @@
       <el-descriptions v-if="currentItem" :column="1" border>
         <el-descriptions-item label="ID">{{ currentItem.id }}</el-descriptions-item>
 
-        <el-descriptions-item label="First Name">
-          {{ currentItem.first_name || (currentItem.name ? currentItem.name.split(' ')[0] : '-') }}
-        </el-descriptions-item>
-        <el-descriptions-item label="Last Name">
-          {{ currentItem.last_name || (currentItem.name ? currentItem.name.split(' ').slice(1).join(' ') : '-') || '-' }}
+        <el-descriptions-item label="Name">
+          {{ currentItem.first_name || currentItem.name || '-' }}
         </el-descriptions-item>
 
         <el-descriptions-item label="Email">{{ currentItem.email }}</el-descriptions-item>

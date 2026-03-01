@@ -20,21 +20,18 @@
         <h3 class="form-heading">WHOLESALE INQUIRY FORM</h3>
         <hr class="section-divider" />
 
-        <form class="contact-form" @submit.prevent="handleSubmit">
+        <form class="contact-form" @submit.prevent="handleSubmit" novalidate>
 
           <div class="form-group">
-            <label for="firstName">First Name <span class="required">*</span></label>
-            <input type="text" id="firstName" v-model="formData.firstName" required />
-          </div>
-
-          <div class="form-group">
-            <label for="lastName">Last Name <span class="required">*</span></label>
-            <input type="text" id="lastName" v-model="formData.lastName" required />
+            <label for="firstName">Name <span class="required">*</span></label>
+            <input type="text" id="firstName" v-model="formData.firstName" />
+            <p v-if="errors.firstName" class="field-error">{{ errors.firstName }}</p>
           </div>
 
           <div class="form-group">
             <label for="email">Email <span class="required">*</span></label>
-            <input type="email" id="email" v-model="formData.email" required />
+            <input type="email" id="email" v-model="formData.email" />
+            <p v-if="errors.email" class="field-error">{{ errors.email }}</p>
           </div>
 
           <div class="form-group">
@@ -100,7 +97,6 @@ const loading = ref(false)
 
 const formData = reactive({
   firstName: '',
-  lastName: '',
   email: '',
   businessInfo: '',
   location: '',
@@ -108,12 +104,40 @@ const formData = reactive({
   message: ''
 })
 
+const errors = reactive({
+  firstName: '',
+  email: ''
+})
+
+const validate = () => {
+  errors.firstName = ''
+  errors.email = ''
+  let valid = true
+
+  if (!formData.firstName.trim()) {
+    errors.firstName = 'Please enter your name so we can get in touch.'
+    valid = false
+  }
+
+  const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!formData.email.trim()) {
+    errors.email = 'Please enter a valid email address.'
+    valid = false
+  } else if (!emailReg.test(formData.email.trim())) {
+    errors.email = 'Please enter a valid email address.'
+    valid = false
+  }
+
+  return valid
+}
+
 const handleSubmit = async () => {
+  if (!validate()) return
+
   loading.value = true
   try {
     const submitData = {
       first_name:         formData.firstName,
-      last_name:          formData.lastName,
       email:              formData.email,
       business_info:      formData.businessInfo,
       location:           formData.location,
@@ -122,18 +146,24 @@ const handleSubmit = async () => {
     }
 
     await submitContactForm(submitData)
-    ElMessage.success('Message sent successfully!')
+    ElMessage({
+      message: "Thank you for your inquiry.\nWe'll get back to you within 24 hours.",
+      type: 'success',
+      duration: 5000,
+      dangerouslyUseHTMLString: false,
+    })
 
     // 重置表单
     Object.assign(formData, {
       firstName: '',
-      lastName: '',
       email: '',
       businessInfo: '',
       location: '',
       estimatedQuantity: '',
       message: ''
     })
+    errors.firstName = ''
+    errors.email = ''
   } catch (error) {
     const message = error.response?.data?.message || 'Failed to send message. Please try again.'
     ElMessage.error(message)
@@ -256,6 +286,13 @@ const handleSubmit = async () => {
     textarea {
       resize: vertical;
       min-height: 90px;
+    }
+
+    .field-error {
+      margin: 5px 0 0;
+      font-size: 12px;
+      color: #c0392b;
+      font-style: italic;
     }
   }
 

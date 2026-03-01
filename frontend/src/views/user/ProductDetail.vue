@@ -267,16 +267,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 700px;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 3px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 2px;
-  }
+  overflow: visible;
 }
 
 .thumb-item {
