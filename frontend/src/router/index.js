@@ -82,7 +82,10 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior() {
+    return { top: 0, behavior: 'instant' }
+  }
 })
 
 // 路由守卫

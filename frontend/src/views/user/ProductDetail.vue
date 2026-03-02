@@ -262,12 +262,30 @@ onMounted(async () => {
 
 // ─── Thumbnails ───────────────────────────────────────────────────────────────
 .thumb-panel {
-  width: 110px;
+  width: 130px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow: visible;
+  max-height: 700px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+    &:hover {
+      background: #aaa;
+    }
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
 }
 
 .thumb-item {
