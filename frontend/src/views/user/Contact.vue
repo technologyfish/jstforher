@@ -64,6 +64,19 @@
           </button>
 
           <p class="response-note">We typically respond within 24 hours.</p>
+
+          <!-- 成功提示 -->
+          <transition name="fade-notice">
+            <div v-if="submitSuccess" class="success-notice">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <div>
+                <p>Submitted successfully!</p>
+              </div>
+              <button class="success-close" @click="submitSuccess = false">✕</button>
+            </div>
+          </transition>
         </form>
 
         <!-- What You Need to Know -->
@@ -94,6 +107,7 @@ import { submitContactForm } from '@/api/contact'
 import contactImage from '@/assets/images/img-8.png'
 
 const loading = ref(false)
+const submitSuccess = ref(false)
 const firstNameRef = ref(null)
 const emailRef = ref(null)
 
@@ -158,12 +172,6 @@ const handleSubmit = async () => {
     }
 
     await submitContactForm(submitData)
-    ElMessage({
-      message: "Thank you for your inquiry.\nWe'll get back to you within 24 hours.",
-      type: 'success',
-      duration: 5000,
-      dangerouslyUseHTMLString: false,
-    })
 
     // 重置表单
     Object.assign(formData, {
@@ -176,9 +184,10 @@ const handleSubmit = async () => {
     })
     errors.firstName = ''
     errors.email = ''
+    submitSuccess.value = true
+    setTimeout(() => { submitSuccess.value = false }, 6000)
   } catch (error) {
-    const message = error.response?.data?.message || 'Failed to send message. Please try again.'
-    ElMessage.error(message)
+    ElMessage.error('Failed to send message. Please try again.')
   } finally {
     loading.value = false
   }
@@ -308,6 +317,57 @@ const handleSubmit = async () => {
     }
   }
 
+  .success-notice {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 24px;
+    background: #f0faf4;
+    border: 1px solid #6dbb8a;
+    border-radius: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 420px;
+
+    svg {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      color: #27ae60;
+      margin-top: 2px;
+    }
+
+    div {
+      flex: 1;
+    }
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #1e7e44;
+      line-height: 1.7;
+      font-style: normal;
+    }
+
+    .success-close {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      color: #6dbb8a;
+      padding: 0;
+      line-height: 1;
+      margin-top: 2px;
+      &:hover { color: #27ae60; }
+    }
+  }
+
   .submit-btn {
     display: block;
     width: 100%;
@@ -333,13 +393,28 @@ const handleSubmit = async () => {
     }
   }
 
-  .response-note {
-    font-size: 12px;
-    color: #999;
-    text-align: center;
-    margin-top: 10px;
-    font-style: italic;
+    .response-note {
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      margin-top: 10px;
+      font-style: italic;
+    }
   }
+
+.fade-notice-enter-active {
+  transition: opacity 0.4s, transform 0.4s;
+}
+.fade-notice-leave-active {
+  transition: opacity 0.4s, transform 0.4s;
+}
+.fade-notice-enter-from {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+.fade-notice-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 // ─── Info Block ──────────────────────────────────────────────────────────────

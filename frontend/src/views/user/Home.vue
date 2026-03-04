@@ -66,12 +66,12 @@
           </swiper-slide>
         </swiper>
         <div class="swiper-button-prev">
-          <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 1024 1024" xmlns="https://www.w3.org/2000/svg">
             <path d="M742.758 87.398L706.56 51.2 256 501.76l450.56 450.56 36.198-36.198L328.397 501.76z" fill="#ffffff"></path>
           </svg>
         </div>
         <div class="swiper-button-next">
-          <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 1024 1024" xmlns="https://www.w3.org/2000/svg">
             <path d="M742.758 87.398L706.56 51.2 256 501.76l450.56 450.56 36.198-36.198L328.397 501.76z" fill="#ffffff"></path>
           </svg>
         </div>
